@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CONTROLLER_NAME	../gen_exp_app.py	/^CONTROLLER_NAME = ""$/;"	kind:variable	line:4
+MODEL_NAME	../gen_exp_app.py	/^MODEL_NAME = ""$/;"	kind:variable	line:5
+PROJ_NAME	../gen_exp_app.py	/^PROJ_NAME = ""$/;"	kind:variable	line:3
+build_angular_component	../gen_exp_app.py	/^def build_angular_component():$/;"	kind:function	line:177
+build_angular_module	../gen_exp_app.py	/^def build_angular_module():$/;"	kind:function	line:246
+build_angular_service	../gen_exp_app.py	/^def build_angular_service():$/;"	kind:function	line:139
+build_controller	../gen_exp_app.py	/^def build_controller():$/;"	kind:function	line:94
+build_model	../gen_exp_app.py	/^def build_model():$/;"	kind:function	line:126
+build_mongoose	../gen_exp_app.py	/^def build_mongoose():$/;"	kind:function	line:16
+build_routes	../gen_exp_app.py	/^def build_routes():$/;"	kind:function	line:80
+build_serverJS	../gen_exp_app.py	/^def build_serverJS():$/;"	kind:function	line:33
+gen_exp_app.py	../gen_exp_app.py	1;"	kind:file	line:1
+gen_folders	../gen_exp_app.py	/^def gen_folders():$/;"	kind:function	line:8
+main	../gen_exp_app.py	/^def main():$/;"	kind:function	line:275
+os	../gen_exp_app.py	/^import os$/;"	kind:namespace	line:1

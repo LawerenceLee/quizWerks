@@ -1,0 +1,32 @@
+<form #registerForm="ngForm"  (submit)="createUser(registerForm)" novalidate>
+    <h3>Register</h3>
+    <p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+  
+    <div class="form-control">
+      <p>Username: <input class="form-control" type="text" name="user.username" [(ngModel)]="user.username" required #usernameField="ngModel" minlength="3" /></p>
+      <div class="alert alert-danger" *ngIf="(registerForm.submitted || usernameField.dirty || usernameField.touched) && usernameField.errors">
+        <div [hidden]="!usernameField.errors.required">Username field is required</div>
+        <div [hidden]="!usernameField.errors.minlength">Username field should be at least 3 characters</div>
+      </div>
+  
+      <p>Email: <input class="form-control" type="text" name="user.email" [(ngModel)]="user.email" required #emailField="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" /></p>
+      <div class="alert alert-danger" *ngIf="(registerForm.submitted || emailField.dirty || emailField.touched) && emailField.errors">
+        <div [hidden]="!emailField.errors.required">Email field is required</div>
+        <div [hidden]="!emailField.errors.pattern">Email is not formatted correctly</div>
+      </div>
+  
+      <p>Password: <input class="form-control" type="password" name="user.password" [(ngModel)]="user.password" required #passwordField="ngModel" minlength="8"/></p>
+      <div class="alert alert-danger" *ngIf="(registerForm.submitted || passwordField.dirty || passwordField.touched) && passwordField.errors">
+        <div [hidden]="!passwordField.errors.required">Password field is required</div>
+        <div [hidden]="!passwordField.errors.minlength">Password field should be at least 8 characters</div>
+      </div>
+
+      <p>Password Confirmation: <input class="form-control" type="password" name="user.passwordConfirm" [(ngModel)]="user.passwordConfirm" required #passwordConfirmField="ngModel" minlength="8" /></p>
+      <div class="alert alert-danger" *ngIf="(registerForm.submitted || passwordConfirmField.dirty || passwordConfirmField.touched) && passwordConfirmField.errors">
+        <div [hidden]="!passwordConfirmField.errors.required">Password Confirmation field is required</div>
+        <div [hidden]="!passwordConfirmField.errors.minlength">Password Confirmation field should be at least 8 characters</div>
+    </div>
+  
+      <button class="btn btn-primary">Register</button>
+    </div>
+  </form>
