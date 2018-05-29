@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { UserHttpService } from "../user-http.service";
+import { AuthHttpService } from "../auth-http.service";
 import { NgForm } from "@angular/forms"
 
 @Component({
@@ -18,7 +18,7 @@ export class RegistrationComponent implements OnInit {
   };
 
   constructor(
-      private _httpService: UserHttpService,
+      private _httpService: AuthHttpService,
       private _route: ActivatedRoute,
       private _router: Router){}
 
@@ -36,7 +36,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     else {
-      this._httpService.postUser(this.user)
+      this._httpService.registerUser(this.user)
         .subscribe(data => {
           if (data['message'] === 'error') { 
             for (let err of data['error']) {

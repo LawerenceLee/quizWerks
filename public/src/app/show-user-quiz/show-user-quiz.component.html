@@ -1,0 +1,32 @@
+<p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+<div *ngIf='!workingQuizMetadata.editing'>
+  <h1>{{ quiz.title }}</h1>
+  <p>{{ quiz.desc }}</p>
+</div>
+<app-edit-quiz-metadata [quiz]="quiz" [workingQuizMetadata]="workingQuizMetadata"></app-edit-quiz-metadata>
+<button *ngIf='!workingQuizMetadata.editing' class="btn btn-link" (click)="setupQuizMetadataEdit()">Edit Quiz Metadata</button>
+<button *ngIf='!workingQuizMetadata.editing' class="btn btn-link" (click)="openCreateForm()">Create New Question</button>
+<br>
+<table class="table" *ngIf="!workingQuestion.editing">
+  <tr>
+    <th>Actions</th>
+    <th>Question</th>
+    <th>Correct Answer</th>
+    <th>Alt Answer 1</th>
+    <th>Alt Answer 2</th>
+    <th>Alt Answer 3</th>
+  </tr>
+  <tr *ngFor="let question of quiz.questions; let i = index">
+    <td>
+      <button class="btn btn-link" (click)="toEditForm(i)">Edit</button>
+      <button class="btn btn-link delete-bttn" (click)="deleteQuestion(i)">Delete</button>
+    </td>
+    <td>{{ question.question }}</td>
+    <td>{{ question.correctAnswer }}</td>
+    <td>{{ question.altAnswer1 }}</td>
+    <td>{{ question.altAnswer2 }}</td>
+    <td>{{ question.altAnswer3 }}</td>
+  </tr>
+</table>
+<br>
+<app-question-form [workingQuestion]="workingQuestion" [quiz]="quiz"></app-question-form>

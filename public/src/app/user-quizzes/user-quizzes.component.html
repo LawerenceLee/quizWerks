@@ -1,0 +1,15 @@
+<table class="table">
+  <h1>Your Quizzes</h1>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Question Count</th>
+    <th>Category</th>
+  </tr>
+  <tr *ngFor="let quiz of quizzes">
+    <td><button class="btn btn-link" type="button" (click)="showQuiz(quiz._id)">{{ quiz.title }}</button></td>
+    <td>{{ quiz.desc }}</td>
+    <td>{{ quiz.questionCount }}</td>
+    <td>{{ quiz.category }}</td>
+  </tr>
+</table>

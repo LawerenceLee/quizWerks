@@ -1,5 +1,5 @@
-
 const mongoose = require("mongoose");
+const Quizzes = mongoose.model('quiz')
 const Users = mongoose.model("user");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
@@ -47,6 +47,41 @@ returnObjBuilder = (res) => {
     }
 }
 
+quizValidation = quiz => {
+    let errors = [];
+    // Quiz title validations
+    if (quiz['title'] === "") {
+        errors.push("Quiz title may not be blank.")
+    }
+    else if (quiz['title'].length <= 3) {errors.push("Quiz title must be at least 3 characters long")}
+    // Quiz Desc validations
+
+    if (quiz['desc'] === "") {
+        errors.push("Quiz description may not be blank.")
+    }
+    else if (quiz['desc'].length <= 10) {errors.push("Quiz description must be at least 10 characters long")}
+    
+    if (!quiz['questions']) {errors.push("You must create at least one question for your quiz")}
+    for (let question of quiz['questions']) {
+        // correct answer must be among alternate answer choices
+        if (question['question'] === "") { errors.push("Question may not be blank.") } 
+        if (question['altAnswer1'] === "") {
+            errors.push("Alternate Answer 1 cannot be blank")
+        }
+        else if (question['altAnswer1'] === question['correctAnswer']) {
+            errors.push("Alternate Answer 1 cannot be the same as the Correct Answer")
+        }
+
+        if (question['altAnswer2'] === question['correctAnswer']) {
+            errors.push("Alternate Answer 2 cannot be the same as the Correct Answer")
+        }
+        if (question['altAnswer3'] === question['correctAnswer']) {
+            errors.push("Alternate Answer 3 cannot be the same as the Correct Answer")
+        }
+    }
+    return errors
+}
+
 userValidation = form => {
     let errors = [];
     // Email
@@ -65,13 +100,46 @@ module.exports = {
     index: (req, res) => {
         const fieldsToReturn = ["_id", "username", "email", "points"]
         Users.find({}, fieldsToReturn, (err, data) => {
-            if (err) res.json({ message: "error", error: err.message });
+            if (err) res.json({ message: "error", error: [err.message] });
             else res.json({ message: "success", data: data }); 
         });
     },
     show: (req, res) => {
         Users.findById(req.params.userId, returnObjBuilder(res));
     },
+    quizzes: (req, res) => { // tested
+        Quizzes.find({ownerId: req.params.userId}, (err, quizzes) => {
+            if (err) return res.json({message: 'error', error: ["Error collecting quizzes"]});
+            else return res.json({message: "success", data: quizzes})
+        })
+    },
+    showQuiz: (req, res) => { // tested
+        Quizzes.findOne(
+            {_id: req.params.quizId, ownerId: req.params.userId},
+            (err, data) => {
+            if (err) return res.json({message: 'error', error: [err.message]});
+            else return res.json({message: "success", data: data});
+        })
+    },
+    editQuiz: (req, res) => { 
+        let errors = quizValidation(req.body);
+        if (errors.length > 0) { res.json({ message: "error", error: errors }) }
+        else {
+            req.body.questionCount = req.body.questions.length;
+            Quizzes.findOneAndUpdate(
+                {_id: req.params.quizId, ownerId: req.params.userId}, req.body, {new: true},
+                (err, data) => {
+                    if (err) return res.json({message: 'error', error: [err.message]});
+                    else return res.json({message: "success", data: data});
+            })
+        };
+    },
+    deleteQuiz: (req, res) => {
+        Quizzes.findOneAndRemove({_id: req.params.quizId, ownerId: req.params.userId}, (err, data) => {
+            if (err) return res.json({message: 'error', error: [err.message]});
+            else return res.json({message: "success", data: data});
+        }
+    )},
     create: (req, res) => {
         // Check for errors in req.body
         let errors = userValidation(req.body);
@@ -79,7 +147,7 @@ module.exports = {
         else {
             // Hash Pswd
             bcrypt.hash(req.body.password, 10, (err, hash) => {
-                if (err) res.json({message: 'error', error: err.message});
+                if (err) res.json({message: 'error', error: [err.message]});
                 else {
                     req.body.password = hash;
                     Users.create(req.body, (err, data) => {

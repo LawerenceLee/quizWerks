@@ -1,0 +1,17 @@
+<p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+<div>
+  <h1>{{ quiz.title }}</h1>
+  <p>{{ quiz.desc }}</p>
+</div>
+<br>
+<table class="table">
+  <tr>
+    <th>#</th>
+    <th>Question</th>
+  </tr>
+  <tr *ngFor="let question of quiz.questions; let i = index">
+    <td>{{ i+1 }}</td>
+    <td>{{ question.question }}</td>
+  </tr>
+</table>
+<br>

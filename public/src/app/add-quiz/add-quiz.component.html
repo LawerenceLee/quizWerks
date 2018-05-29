@@ -1,0 +1,54 @@
+<form #quizForm="ngForm"  (submit)="createQuiz(quizForm)" novalidate>
+  <h3>Create Quiz</h3>
+  <p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+
+  <div class="form-control">
+    <p>Quiz Title (required): <input class="form-control" type="text" name="newQuiz.title" [(ngModel)]="newQuiz.title" required #titleField="ngModel" /></p>
+    <div class="alert alert-danger" *ngIf="(quizForm.submitted || titleField.dirty || titleField.touched) && titleField.errors">
+      <div [hidden]="!titleField.errors.required">Title field is required</div>
+    </div>
+
+    <p>Description (required): <input class="form-control" type="text" name="newQuiz.desc" [(ngModel)]="newQuiz.desc" required #discField="ngModel" /></p>
+    <div class="alert alert-danger" *ngIf="(quizForm.submitted || discField.dirty || discField.touched) && discField.errors">
+      <div [hidden]="!discField.errors.required">Description field is required</div>
+    </div>
+
+    <p>First Question (required): <input class="form-control" type="text" name="newQuestion.question" [(ngModel)]="newQuestion.question" required #questionField="ngModel" /></p>
+    <div class="alert alert-danger" *ngIf="(quizForm.submitted || questionField.dirty || questionField.touched) && questionField.errors">
+      <div [hidden]="!questionField.errors.required">Question field is required</div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="correctAnswer">Correct Answer (required):</label>
+        <input type="text" class="form-control" name="newQuestion.correctAnswer" [(ngModel)]="newQuestion.correctAnswer" #correctAnswerField="ngModel" required />
+        <div class="alert alert-danger" *ngIf="(quizForm.submitted || correctAnswerField.dirty || correctAnswerField.touched) && correctAnswerField.errors">
+          <div [hidden]="!correctAnswerField.errors.required">Correct Answer field is required</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6" >
+        <label for="altAnswer1">Alternate Answer 1 (required):</label>
+        <input type="text" class="form-control" name="newQuestion.altAnswer1" [(ngModel)]="newQuestion.altAnswer1" #altAnswer1Field="ngModel" required />
+        <div class="alert alert-danger" *ngIf="(quizForm.submitted || altAnswer1Field.dirty || altAnswer1Field.touched) && altAnswer1Field.errors">
+          <div [hidden]="!altAnswer1Field.errors.required">Alternate Answer 1 field is required</div>
+        </div>
+      </div>
+    </div>
+      
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="altAnswer2">Alternate Answer 2:</label>
+        <input type="text" class="form-control" name="newQuestion.altAnswer2" [(ngModel)]="newQuestion.altAnswer2" />
+      </div>
+      
+      <div class="form-group col-md-6" >
+        <label for="altAnswer3">Alternate Answer 3:</label>
+        <input type="text" class="form-control" name="newQuestion.altAnswer3" [(ngModel)]="newQuestion.altAnswer3" />
+      </div>
+    </div>
+
+    <button class="btn btn-primary">Create Quiz</button>
+    <a class="btn btn-link" routerLink="/all">Cancel</a>
+  </div>
+</form>

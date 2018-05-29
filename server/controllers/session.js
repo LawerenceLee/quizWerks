@@ -35,15 +35,14 @@ module.exports = {
     create: (req, res) => {
         Users.findOne({email: req.body.email}, (err, data) => {
             // Couldn't find user
-            if (err)  res.json({ message: "error", error: [err.message] })
+            if (err) return res.json({ message: "error", error: [err.message] })
             // Found User
             else { 
                 // Compare PSWDS
-                console.log(data)
-                console.log(data['password'])
+                if (!data) return res.json({message: 'error', error: ['The credentials you provided do not match our records']})
                 bcrypt.compare(req.body.password, data.password, (err, result) => {
                     // PSWDS do not match
-                    if (err) res.json({ message: "error", error: [err.message] });
+                    if (err) return res.json({ message: "error", error: [err.message] });
                     // Matching PSWDS
                     else {
                         const user = {

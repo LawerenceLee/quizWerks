@@ -1,0 +1,45 @@
+<form #questionForm="ngForm" *ngIf="workingQuestion.editing" (submit)="createOrUpdate(questionForm)" novalidate>
+  <h3>{{ workingQuestion.formType }}</h3>
+  <p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+  <div class="form-control row">
+    
+    <p>Question: <input class="form-control" type="text" name="workingQuestion.question" [(ngModel)]="workingQuestion.question" required #questionField="ngModel" /></p>
+    <div class="alert alert-danger" *ngIf="(questionForm.submitted || questionField.dirty || questionField.touched) && questionField.errors">
+      <div [hidden]="!questionField.errors.required">Question field is required</div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6" >
+        <label for="correctAnswer">Correct Answer (required):</label>
+        <input type="text" class="form-control" name="workingQuestion.correctAnswer" [(ngModel)]="workingQuestion.correctAnswer" #correctAnswerField="ngModel" required />
+        <div class="alert alert-danger" *ngIf="(questionForm.submitted || correctAnswerField.dirty || correctAnswerField.touched) && correctAnswerField.errors">
+          <div [hidden]="!correctAnswerField.errors.required">Correct Answer field is required</div>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6" >
+        <label for="altAnswer1">Alternate Answer 1 (required):</label>
+        <input type="text" class="form-control" name="workingQuestion.altAnswer1" [(ngModel)]="workingQuestion.altAnswer1" #altAnswer1Field="ngModel" required />
+        <div class="alert alert-danger" *ngIf="(questionForm.submitted || altAnswer1Field.dirty || altAnswer1Field.touched) && altAnswer1Field.errors">
+          <div [hidden]="!altAnswer1Field.errors.required">Alternate Answer 1 field is required</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6" >
+          <label for="altAnswer2">Alternate Answer 2:</label>
+          <input type="text" class="form-control" name="workingQuestion.altAnswer2" [(ngModel)]="workingQuestion.altAnswer2" />
+        </div>
+
+        <div class="form-group col-md-6" >
+          <label for="altAnswer3">Alternate Answer 3:</label>
+          <input type="text" class="form-control" name="workingQuestion.altAnswer3" [(ngModel)]="workingQuestion.altAnswer3" />
+        </div>
+      </div>
+
+      <button *ngIf="workingQuestion.formType === 'Edit Question'" class="btn btn-primary">Update Question</button>
+      <button *ngIf="workingQuestion.formType === 'Create Question'" class="btn btn-primary">Create Question</button>
+      <button type="button" (click)="resetPage()" class="btn btn-link">Cancel</button>
+    </div>
+</form>

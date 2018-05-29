@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
-import { LoginHttpService } from "../login-http.service";
+import { AuthHttpService } from "../auth-http.service";
 import { NgForm } from "@angular/forms"
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   constructor(
-    private _httpService: LoginHttpService,
+    private _httpService: AuthHttpService,
     private _route: ActivatedRoute,
     private _router: Router){}
 
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     else {
-      this._httpService.login(this.loginAttempt)
+      this._httpService.loginUser(this.loginAttempt)
         .subscribe(data => {
           if (data['message'] === 'error') {
             for (let err of data['error']) {
@@ -38,7 +38,9 @@ export class LoginComponent implements OnInit {
           }
           else {
             localStorage.setItem('token', data['token']);
-            // this._router.navigate(["/all"])
+            localStorage.setItem('userId', data['data']['_id']);
+            localStorage.setItem('username', data['data']['username']);
+            this._router.navigate([`/${data['data']['username']}/quizzes`])
           }
         })
 

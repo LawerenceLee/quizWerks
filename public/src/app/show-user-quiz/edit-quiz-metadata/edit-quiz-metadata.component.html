@@ -1,0 +1,21 @@
+<form #quizUpdateForm="ngForm" *ngIf="workingQuizMetadata.editing" (submit)="updateMetadata(quizUpdateForm)" novalidate>
+    <h3>Edit Quiz Metadata</h3>
+    <p class="alert alert-danger" role="alert" *ngFor="let error of errors">{{ error }}</p>
+  
+    <div class="form-control">
+      <p>Quiz Title (required): <input class="form-control" type="text" name="workingQuizMetadata.title" [(ngModel)]="workingQuizMetadata.title" required #titleField="ngModel" /></p>
+      <div class="alert alert-danger" *ngIf="(quizUpdateForm.submitted || titleField.dirty || titleField.touched) && titleField.errors">
+        <div [hidden]="!titleField.errors.required">Title field is required</div>
+      </div>
+  
+      <p>Description (required): <input class="form-control" type="text" name="workingQuizMetadata.desc" [(ngModel)]="workingQuizMetadata.desc" required #discField="ngModel" /></p>
+      <div class="alert alert-danger" *ngIf="(quizUpdateForm.submitted || discField.dirty || discField.touched) && discField.errors">
+        <div [hidden]="!discField.errors.required">Description field is required</div>
+      </div>
+  
+      <button class="btn btn-primary" type="submit" >Update Quiz</button>
+      <button class="btn btn-link" type="button" (click)="resetPage()">Cancel</button>
+      <button class="btn btn-danger" type="button" (click)="deleteQuiz()">DELETE THIS QUIZ!</button>
+    </div>
+  </form>
+  <br>
