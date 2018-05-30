@@ -72,8 +72,9 @@ export class QuestionFormComponent implements OnInit {
           this.errors = data['error'];
         }
         else { 
-          this.quiz = data['data'];
           this.resetPage();
+          this.quiz = data['data'];
+          return;
         };
       });
   };

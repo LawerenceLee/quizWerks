@@ -9,6 +9,7 @@ import { UserQuizzesComponent } from "./user-quizzes/user-quizzes.component"
 import { AddQuizComponent } from './add-quiz/add-quiz.component';
 import { ShowUserQuizComponent } from './show-user-quiz/show-user-quiz.component'
 import { ShowQuizComponent} from './show-quiz/show-quiz.component'
+import { SoloQuizComponent } from './solo-quiz/solo-quiz.component'
 
 const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
@@ -18,8 +19,7 @@ const routes: Routes = [
   { path: 'quizzes', component: AllQuizzesComponent},
   { path: 'quiz/new', component: AddQuizComponent, canActivate: [AuthGuard]},
   { path: 'quiz/:quizId', component: ShowQuizComponent},
-
-  // { path: 'user', component: UserView, canActivate: [AuthGuard]}
+  { path: 'quiz/:quizId/takesoloquiz', component: SoloQuizComponent},
 
   { path: '', pathMatch: 'full', redirectTo: "/quizzes" },
 ];

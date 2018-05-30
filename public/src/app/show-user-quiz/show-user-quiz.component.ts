@@ -1,6 +1,7 @@
 import { UserHttpService } from "../user-http.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { QuestionFormComponent } from "./question-form/question-form.component";
 
 @Component({
   selector: 'app-show-user-quiz',
@@ -44,11 +45,12 @@ export class ShowUserQuizComponent implements OnInit {
         .subscribe(data => {
           if (data["message"] === "error") { this.errors.push("That quiz Id does not exist") }
           else { 
-            if (data['data'] !== null) this.quiz = data['data'];
+            if (data['data'] !== null) this.quiz = data['data']; 
           }
         })
     });
   }
+
 
   setupQuizMetadataEdit() {
     this.workingQuizMetadata.title = this.quiz.title;

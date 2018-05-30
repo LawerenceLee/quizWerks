@@ -16,7 +16,7 @@
     <th>Alt Answer 2</th>
     <th>Alt Answer 3</th>
   </tr>
-  <tr *ngFor="let question of quiz.questions; let i = index">
+  <tr *ngFor="let question of quiz.questions; index as i">
     <td>
       <button class="btn btn-link" (click)="toEditForm(i)">Edit</button>
       <button class="btn btn-link delete-bttn" (click)="deleteQuestion(i)">Delete</button>

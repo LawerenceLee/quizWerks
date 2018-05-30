@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col">
+    <h1>{{ quiz.title }}</h1>
+    <h4>{{ quiz.desc }}</h4>
+  </div>
+  <div class="col col-sm-3">
+    <h2>{{ timer }} Seconds</h2>
+    <p>Correct: {{ correct }}</p>
+    <p>Incorrect: {{ incorrect }}</p>
+  </div>
+</div>
+<br>
+<button class="btn btn-danger" *ngIf="!quizRunning" (click)="nextQuestionBtn()">Load Question</button>
+<button class="btn btn-danger" *ngIf="quizFinished" [routerLink]="['/quizzes']">Return Home</button>
+<br><br>
+<div class="card-body card" *ngIf="quizRunning && !quizFinished">
+  <h3>Question: {{ workingQuestion.question }}</h3>
+  <button *ngIf="workingQuestion.answers[0]"  (click)="submitAnswer(workingQuestion.answers[0])">{{ workingQuestion.answers[0] }}</button>
+  <button *ngIf="workingQuestion.answers[1]" (click)="submitAnswer(workingQuestion.answers[1])">{{ workingQuestion.answers[1] }}</button>
+  <button *ngIf="workingQuestion.answers[2]" (click)="submitAnswer(workingQuestion.answers[2])">{{ workingQuestion.answers[2] }}</button>
+  <button *ngIf="workingQuestion.answers[3]" (click)="submitAnswer(workingQuestion.answers[3])">{{ workingQuestion.answers[3] }}</button>
+  <br>
+  <p>Current Answer: {{ currentAnswer }}</p>
+</div>

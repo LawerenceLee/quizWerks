@@ -18,6 +18,7 @@ import { ShowUserQuizComponent } from "./show-user-quiz/show-user-quiz.component
 import { EditQuizMetadataComponent } from "./show-user-quiz/edit-quiz-metadata/edit-quiz-metadata.component";
 import { QuestionFormComponent } from "./show-user-quiz/question-form/question-form.component";
 import { ShowQuizComponent } from "./show-quiz/show-quiz.component";
+import { SoloQuizComponent } from './solo-quiz/solo-quiz.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ declarations: [
     EditQuizMetadataComponent,
     QuestionFormComponent,
     ShowQuizComponent,
+    SoloQuizComponent,
 ],
 imports: [
     BrowserModule,

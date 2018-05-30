@@ -10,18 +10,24 @@
         <li class="nav-item active">
           <a class="nav-link" href="/quizzes">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active" *ngIf="!_httpService.loggedIn()">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        <li class="nav-item active" *ngIf="!_httpService.loggedIn()">
+          <a class="nav-link" href="/registration">Register</a>
+        </li>
+        <li class="nav-item" *ngIf="_httpService.loggedIn()">
           <a class="nav-link" href="/quiz/new">Create Quiz</a>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="_httpService.loggedIn()">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Account
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="/{{ signedInUsername }}/quizzes">My Quizzes</a>
             <a class="dropdown-item" href="#">Another action</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <a class="dropdown-item" (click)="_httpService.logoutUser()">Logout</a>
           </div>
         </li>
       </ul>

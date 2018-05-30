@@ -11,6 +11,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class UserQuizzesComponent implements OnInit {
   quizzes: any[];
   errors = [];
+  signedInUsername: string;  
 
   constructor(
     private _httpService: UserHttpService,
@@ -19,7 +20,7 @@ export class UserQuizzesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.signedInUsername = localStorage.getItem('username');
     this._httpService.getUserQuizzes(localStorage.getItem('userId'))
       .subscribe(data => {
         if (data["message"] === "error") { 
@@ -28,13 +29,13 @@ export class UserQuizzesComponent implements OnInit {
           }
         }
         if (data['data']) {
-          this.quizzes = data["data"]
+          this.quizzes = data["data"];
         };
       })
   }
 
   showQuiz(quizId) {
-    this._router.navigate([`/${localStorage.getItem('username')}/quiz/${quizId}`])
+    this._router.navigate([`/${localStorage.getItem('username')}/quiz/${quizId}`]);
   }
 
 }

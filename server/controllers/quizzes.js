@@ -51,8 +51,8 @@ module.exports = {
         })
     },
     show: (req, res) => { // Tested
-        const fieldsToReturn = ['_id', 'title', 'desc', 'questions.question']
-        Quizzes.findById(req.params.quizId, fieldsToReturn, (err, data) => {
+        // const fieldsToReturn = ['_id', 'title', 'desc', 'questions.question']
+        Quizzes.findById(req.params.quizId, (err, data) => {
             if (err) return res.json({message: 'error', error: err.message});
             else return res.json({message: "success", data: data});
         })
