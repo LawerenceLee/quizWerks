@@ -25,7 +25,7 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/{{ signedInUsername }}/quizzes">My Quizzes</a>
-            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="/{{ signedInUsername }}/scheduler">Create Live Event</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="_httpService.logoutUser()">Logout</a>
           </div>

@@ -12,7 +12,6 @@
     <p>Password: <input class="form-control" type="password" name="loginAttempt.password" [(ngModel)]="loginAttempt.password" required #passwordField="ngModel" minlength="8"/></p>
     <div class="alert alert-danger" *ngIf="(loginForm.submitted || passwordField.dirty || passwordField.touched) && passwordField.errors">
       <div [hidden]="!passwordField.errors.required">Password field is required</div>
-      <div [hidden]="!passwordField.errors.minlength">Password field should be at least 8 characters</div>
     </div>
 
     <button class="btn btn-primary">Login</button>

@@ -2,6 +2,7 @@ import { UserHttpService } from "./user-http.service";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params, Router } from "@angular/router";
 import { AuthHttpService } from "./auth-http.service"
+import * as socketIo from 'socket.io-client'
 
 @Component({
     selector: "app-root",
@@ -20,8 +21,13 @@ export class AppComponent implements OnInit{
         private _router: Router
     ){}
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.signedInUsername = localStorage.getItem('username')
+        const socket = socketIo('http://localhost:3000');
+
+        socket.on('hello', data => {
+            console.log(data);
+        })
     }
 
 

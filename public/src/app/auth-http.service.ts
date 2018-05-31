@@ -35,8 +35,5 @@ export class AuthHttpService {
         return localStorage.getItem('token')
     }
 
-    // logout() {
-    //     return this._http.get(`/api/logout`)
-    // }
 }
 

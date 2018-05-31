@@ -29,7 +29,5 @@ export class QuizHttpService {
         return this._http.delete(`/api/quizzes/${quizId}`)
     }
 
-
-
 }
 

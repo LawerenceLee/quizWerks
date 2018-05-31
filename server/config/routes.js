@@ -1,6 +1,7 @@
 const quizzes = require("../controllers/quizzes");
 const users = require("../controllers/users");
 const session = require("../controllers/session");
+const event = require("../controllers/events")
 const jwt = require('jsonwebtoken');
 const RSA_SECRET_KEY = `
 MIIEowIBAAKCAQEAs/sYIrulv0/ZqdTkh3eKV32Ad3e7cW6OJXgsmRCbXNbbCWnW
@@ -66,4 +67,6 @@ module.exports = app => {
     app.post("/api/quizzes", verifyToken, quizzes.create);
 
     app.post("/api/login", session.create);
+
+    app.post("/api/event", event.create)
 }

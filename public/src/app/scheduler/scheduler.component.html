@@ -1,0 +1,25 @@
+<form class="col" (submit)=onSubmit()>
+  <div class="form-row">
+    <div class="form-group col">
+      <label for="quizSelect">Quiz: </label>
+      <select class="form-control" name="quizSelect" [(ngModel)]="quizSelect" id="quizSelect">
+        <option *ngFor="let quiz of quizzes" value="{{ quiz._id }}">{{ quiz.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col">
+      <label for="dp">Event Date: </label>
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" [minDate]="minDate" [maxDate]="maxDate"
+                name="dp" [(ngModel)]="date" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">CALENDAR</button>
+          </div>
+        </div>
+     </div>
+    </div>
+    <div class="form-group">
+      <label for="time">Event Time: </label>
+      <ngb-timepicker class="form-control" name="time" [minuteStep]='minuteStep' [(ngModel)]="time"></ngb-timepicker>
+    </div>
+    <button class="btn btn-primary">Submit</button>
+</form>

@@ -19,7 +19,8 @@ import { EditQuizMetadataComponent } from "./show-user-quiz/edit-quiz-metadata/e
 import { QuestionFormComponent } from "./show-user-quiz/question-form/question-form.component";
 import { ShowQuizComponent } from "./show-quiz/show-quiz.component";
 import { SoloQuizComponent } from './solo-quiz/solo-quiz.component';
-
+import { SchedulerComponent } from './scheduler/scheduler.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 declarations: [
@@ -34,12 +35,14 @@ declarations: [
     QuestionFormComponent,
     ShowQuizComponent,
     SoloQuizComponent,
+    SchedulerComponent,
 ],
 imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgbModule.forRoot()
 ],
 providers: [UserHttpService, QuizHttpService, AuthHttpService, AuthGuard,
 {
